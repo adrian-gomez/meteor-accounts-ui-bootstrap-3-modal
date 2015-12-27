@@ -40,35 +40,50 @@
 <!-- LOGGED OUT -->
 <!--            -->
 <template name="_loginButtonsLoggedOutDropdown">
-	<li id="login-dropdown-list" class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown">{{i18n 'loginButtonsLoggedOutDropdown.signIn'}}{{#unless forbidClientAccountCreation}} / {{i18n 'loginButtonsLoggedOutDropdown.up'}}{{/unless}} <b class="caret"></b></a>
-		<div class="dropdown-menu">
-			{{> _loginButtonsLoggedOutAllServices}}
-		</div>
-	</li>
+	<button id="login-dropdown-list" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginButtonsLoggedOutAllServices">
+		{{i18n 'loginButtonsLoggedOutDropdown.signIn'}}{{#unless forbidClientAccountCreation}} / {{i18n 'loginButtonsLoggedOutDropdown.up'}}{{/unless}}
+	</button>
+	{{> _loginButtonsLoggedOutAllServices}}
 </template>
 
 <template name="_loginButtonsLoggedOutAllServices">
-	{{#each services}}
-	{{#unless hasPasswordService}}
-		{{> _loginButtonsMessages}}
-	{{/unless}}
-		{{#if isPasswordService}}
-			{{#if hasOtherServices}} {{! the password service will always come last }}
-				{{> _loginButtonsLoggedOutPasswordServiceSeparator}}
-			{{/if}}
-			{{> _loginButtonsLoggedOutPasswordService}}
-		{{else}}
-			{{> _loginButtonsLoggedOutSingleLoginButton}}
-		{{/if}}
-	{{/each}}
+	<div class="modal fade" id="loginButtonsLoggedOutAllServices" tabindex="-1" role="dialog" aria-labelledby="loginButtonsLoggedOutAllServicesLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="loginButtonsLoggedOutAllServicesLabel">
+						{{i18n 'loginButtonsLoggedOutDropdown.signIn'}}{{#unless forbidClientAccountCreation}} / {{i18n 'loginButtonsLoggedOutDropdown.up'}}{{/unless}}
+					</h4>
+				</div>
+				<div class="modal-body">
+					{{#each services}}
+						{{#unless hasPasswordService}}
+							{{> _loginButtonsMessages}}
+						{{/unless}}
+						{{#if isPasswordService}}
+							{{> _loginButtonsLoggedOutPasswordService}}
+							{{#if hasOtherServices}} {{! the password service will always come first }}
+								{{> _loginButtonsLoggedOutPasswordServiceSeparator}}
+							{{/if}}
+						{{else}}
+							{{> _loginButtonsLoggedOutSingleLoginButton}}
+						{{/if}}
+					{{/each}}
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <template name="_loginButtonsLoggedOutPasswordServiceSeparator">
+	<div class="clearfix"></div>
+
 	<div class="or">
-		<span class="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-		<span class="or-text">{{i18n 'loginButtonsLoggedOutPasswordServiceSeparator.or'}}</span>
-		<span class="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<hr class="col-md-5 pull-left">
+		<span class="or-text col-md-0">{{i18n 'loginButtonsLoggedOutPasswordServiceSeparator.or'}}</span>
+		<hr class="col-md-5 pull-right">
 	</div>
 </template>
 
@@ -89,12 +104,12 @@
 		</button>
 		{{#if inLoginFlow}}
 			<div id="login-other-options">
-			{{#if showForgotPasswordLink}}
-				<a id="forgot-password-link" class="pull-left" >{{i18n 'loginButtonsLoggedOutPasswordService.forgot'}}</a>
-			{{/if}}
-			{{#if showCreateAccountLink}}
-				<a id="signup-link" class="pull-right" >{{i18n 'loginButtonsLoggedOutPasswordService.createAcc'}}</a>
-			{{/if}}
+				{{#if showForgotPasswordLink}}
+					<a id="forgot-password-link" class="pull-left" >{{i18n 'loginButtonsLoggedOutPasswordService.forgot'}}</a>
+				{{/if}}
+				{{#if showCreateAccountLink}}
+					<a id="signup-link" class="pull-right" >{{i18n 'loginButtonsLoggedOutPasswordService.createAcc'}}</a>
+				{{/if}}
 			</div>
 		{{/if}}
 		{{#if inSignupFlow}}
@@ -172,4 +187,3 @@
 	<button class="btn btn-block btn-primary" id="login-buttons-do-change-password">{{i18n 'loginButtonsChangePassword.submit'}}</button>
 	<button class="btn btn-block btn-default" id="login-buttons-cancel-change-password">{{i18n 'loginButtonsChangePassword.cancel'}}</button>
 </template>
-

@@ -214,7 +214,12 @@
 		},
 
 		services: function() {
-			return Accounts._loginButtons.getLoginServices();
+			var services = Accounts._loginButtons.getLoginServices();
+
+			var passwordService = services.filter(function(service) { return service.name === 'password' });
+			var servicesNoPassword = services.filter(function(service) { return service.name !== 'password' });
+
+			return passwordService.concat(servicesNoPassword);
 		},
 
 		isPasswordService: function() {

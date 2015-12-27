@@ -1,7 +1,7 @@
-meteor-accounts-ui-bootstrap-3
+accounts-ui-bootstrap-3-modal
 ==============================
 
-Meteor accounts-ui styled with Twitter's Bootstrap 3, now with multi-language support.
+Meteor accounts-ui styled with Twitter's Bootstrap 3 usin modals, now with multi-language support.
 
 Installation
 ------------
@@ -9,7 +9,7 @@ Installation
 With Meteor >=0.9.0:
 
 ```sh
-$ meteor add ian:accounts-ui-bootstrap-3
+$ meteor add agomez:accounts-ui-bootstrap-3-modal
 ```
 
 [`twbs:bootstrap`](https://atmospherejs.com/twbs/bootstrap) is the recommended Meteor implementation of Twitter's Bootstrap, and is declared as a weak dependency in this package. [`nemo64:bootstrap`](https://atmospherejs.com/nemo64/bootstrap) is also supported. If you're using any other Bootstrap package, you're on your own regarding load order problems.
@@ -253,4 +253,3 @@ Screenshots
 ![Sign In](http://i.imgur.com/SGLZkOE.png)
 ![Sign Up](http://i.imgur.com/7S3C18J.png)
 ![Configure Login Service](http://i.imgur.com/Noa7sSm.png)
-
